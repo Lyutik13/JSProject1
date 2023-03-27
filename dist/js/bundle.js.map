@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","mappings":"AAAYA,SAASC,cAAc,QACzBD,SAASC,cAAc,WACtBD,SAASC,cAAc","sources":["webpack://gulpstart/./src/js/script.js"],"sourcesContent":["const box = document.querySelector(\".box\"),\r\n    btn = document.querySelector(\".button\"),\r\n    menu = document.querySelector(\".menu\");\r\n"],"names":["document","querySelector"],"sourceRoot":""}
