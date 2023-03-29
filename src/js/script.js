@@ -1,3 +1,3 @@
-const box = document.querySelector(".box"),
-    btn = document.querySelector(".button"),
-    menu = document.querySelector(".menu");
+import "./modules/slider"
+
+console.log(1);

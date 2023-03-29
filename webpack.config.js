@@ -1,19 +1,17 @@
 "use strict";
 
-const path = require('path');
+const path = require("path");
 
 module.exports = {
     // production development
-    mode: "production",
+    mode: "development",
     entry: "./src/js/script.js",
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist/js",
     },
     watch: true,
-
     devtool: "source-map",
-
     module: {
         rules: [
             {
