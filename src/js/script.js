@@ -1,3 +1,6 @@
-import "./modules/slider"
+import "./modules/slider";
+import modal from "./modules/modal";
 
-console.log(1);
+window.addEventListener("DOMContentLoaded", () => {
+	modal();
+});

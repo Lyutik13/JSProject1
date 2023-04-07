@@ -3,6 +3,15 @@
 @import '../../node_modules/slick-carousel/slick/slick.scss';
 @import '../../node_modules/slick-carousel/slick/slick-theme.scss';
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+
 @import 'libs/styleOld';
 
 

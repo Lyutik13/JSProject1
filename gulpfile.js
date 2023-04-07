@@ -52,7 +52,7 @@ function watching() {
     });
 
     watch(["./src/*.html"], html).on("change", browserSync.reload);
-    watch(["./src/scss/**/*.scss"], styles);
+    watch(["./src/sass/**/*.scss"], styles);
     watch(["./src/js/**/*.js"], scripts);
     watch(["./src/img/**/*.*", "./src/server.php"], bilds);
 }
