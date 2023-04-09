@@ -1,39 +1,53 @@
-const modal = () => {
-	const modalTrigger = document.querySelectorAll("[data-modal]"),
-		modalCloseBtn = document.querySelector("[data-close]"),
-		modalWindow = document.querySelector(".popup_engineer");
+const modals = (triggerSelector, modalSelector, closeSelector, time = 60000) => {
+	const trigger = document.querySelectorAll(triggerSelector),
+		modal = document.querySelector(modalSelector),
+		close = document.querySelector(closeSelector);
 
 	function closeModal() {
-		modalWindow.classList.add("hide");
-		modalWindow.classList.remove("show");
+		modal.classList.add("hide");
+		modal.classList.remove("show");
 		document.body.style.overflow = "";
 	}
 
 	function openModal() {
-		modalWindow.classList.add("show");
-		modalWindow.classList.remove("hide");
+		modal.classList.add("show");
+		modal.classList.remove("hide");
 		document.body.style.overflow = "hidden";
 	}
 
-	modalTrigger.forEach((item) => {
-		item.addEventListener("click", () => openModal());
+	trigger.forEach((item) => {
+		item.addEventListener("click", (e) => {
+			// проверка на то что ел. был задействован(.target) и сброс стандартного поведения браезера (.preventDefault)
+			if (e.target) {
+				e.preventDefault();
+			}
+			openModal();
+		});
 	});
 
-	modalCloseBtn.addEventListener("click", () => closeModal());
+	close.addEventListener("click", () => closeModal());
 
 	// закрытие modal по клику в области
-	modalWindow.addEventListener("click", (e) => {
-		if (e.target === modalWindow) {
+	modal.addEventListener("click", (e) => {
+		if (e.target === modal) {
 			closeModal();
 		}
 	});
 
 	// Закрытие модального окна при клике на клавишу ESC.
 	document.addEventListener("keydown", (e) => {
-		if (e.code === "Escape" && modalWindow.classList.contains("show")) {
+		if (e.code === "Escape" && modal.classList.contains("show")) {
 			closeModal();
 		}
 	});
+
+	// Открытие модалки через некоторое время (time = 60sec)
+	function showModalByTime() {
+		setTimeout(function () {
+			openModal();
+		}, time);
+	}
+	// showModalByTime();
 };
 
-export default modal;
+export default modals;

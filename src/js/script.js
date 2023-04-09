@@ -1,6 +1,6 @@
 import "./modules/slider";
-import modal from "./modules/modal";
+import modals from "./modules/modal";
 
 window.addEventListener("DOMContentLoaded", () => {
-	modal();
+	modals("[data-modal]", ".popup_engineer", "[data-close]");
 });
