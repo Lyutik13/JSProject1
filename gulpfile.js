@@ -9,52 +9,55 @@ const htmlmin = require("gulp-htmlmin");
 const cleanCSS = require("gulp-clean-css");
 const webpack = require("webpack-stream");
 
+const dist = "./dist/";
+// const dist = "V:/for_programing/ospanel/domains/test";
+
 function styles() {
-    return src("./src/sass/style.scss")
-        .pipe(sourcemaps.init())
-        .pipe(scss({ outputStyle: "compressed" }))
-        .pipe(cleanCSS({ compatibility: "ie10" }))
-        .pipe(
-            autoprefixer(["> 0.5%", "last 1 versions", "not dead"], {
-                cascade: false,
-            })
-        )
-        .pipe(rename({ suffix: ".min", prefix: "" }))
-        .pipe(sourcemaps.write("./"))
-        .pipe(dest("./dist/css"))
-        .pipe(browserSync.stream());
+	return src("./src/sass/style.scss")
+		.pipe(sourcemaps.init())
+		.pipe(scss({ outputStyle: "compressed" }))
+		.pipe(cleanCSS({ compatibility: "ie10" }))
+		.pipe(
+			autoprefixer(["> 0.5%", "last 1 versions", "not dead"], {
+				cascade: false,
+			})
+		)
+		.pipe(rename({ suffix: ".min", prefix: "" }))
+		.pipe(sourcemaps.write("./"))
+		.pipe(dest(dist + "/css"))
+		.pipe(browserSync.stream());
 }
 
 function scripts() {
-    return src("./src/js/script.js")
-        .pipe(webpack(require("./webpack.config.js")))
-        .pipe(dest("./dist/js"))
-        .pipe(browserSync.stream());
+	return src("./src/js/script.js")
+		.pipe(webpack(require("./webpack.config.js")))
+		.pipe(dest(dist + "/js"))
+		.pipe(browserSync.stream());
 }
 
 function html() {
-    return src(["./src/*.html"], { base: "src" })
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(dest("./dist/"));
+	return src(["./src/*.html"], { base: "src" })
+		.pipe(htmlmin({ collapseWhitespace: true }))
+		.pipe(dest(dist));
 }
 
 function bilds() {
-    return src(["./src/img/**/*.*", "./src/server.php"], { base: "src" })
-        .pipe(dest("./dist/"))
-        .pipe(browserSync.stream());
+	return src(["./src/img/**/*.*", "./src/server.php"], { base: "src" })
+		.pipe(dest(dist))
+		.pipe(browserSync.stream());
 }
 
 function watching() {
-    browserSync.init({
-        server: {
-            baseDir: "./dist",
-        },
-    });
+	browserSync.init({
+		server: {
+			baseDir: "./dist",
+		},
+	});
 
-    watch(["./src/*.html"], html).on("change", browserSync.reload);
-    watch(["./src/sass/**/*.scss"], styles);
-    watch(["./src/js/**/*.js"], scripts);
-    watch(["./src/img/**/*.*", "./src/server.php"], bilds);
+	watch(["./src/*.html"], html).on("change", browserSync.reload);
+	watch(["./src/sass/**/*.scss"], styles);
+	watch(["./src/js/**/*.js"], scripts);
+	watch(["./src/img/**/*.*", "./src/server.php"], bilds);
 }
 
 exports.bilds = bilds;
