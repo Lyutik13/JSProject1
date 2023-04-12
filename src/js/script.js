@@ -6,11 +6,11 @@ import tabs from "./modules/tabs";
 import forms from "./modules/forms";
 
 window.addEventListener("DOMContentLoaded", () => {
-	modals(".header_btn", ".popup_engineer", ".popup_dialog-close", true);
+	modals(".header_btn", ".popup_engineer", ".popup_dialog-close", true, true);
 	modals(".phone_link", ".popup", ".popup_close");
-	modals(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
-	modals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close");
-	modals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close");
+	modals(".popup_calc_btn", ".popup_calc", ".popup_calc_close", false);
+	modals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
+	modals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
 
 	tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");
 	tabs(
