@@ -1,7 +1,14 @@
-const modals = (triggerSelector, modalSelector, closeSelector, time = 60000) => {
+const modals = (
+	triggerSelector,
+	modalSelector,
+	closeSelector,
+	openModalTimerAdd = false,
+	time = 60000
+) => {
 	const trigger = document.querySelectorAll(triggerSelector),
 		modal = document.querySelector(modalSelector),
-		close = document.querySelector(closeSelector);
+		close = document.querySelector(closeSelector),
+		windows = document.querySelectorAll("[data-m]");
 
 	function closeModal() {
 		modal.classList.add("hide");
@@ -21,11 +28,14 @@ const modals = (triggerSelector, modalSelector, closeSelector, time = 60000) => 
 			if (e.target) {
 				e.preventDefault();
 			}
+
 			openModal();
 		});
 	});
 
-	close.addEventListener("click", () => closeModal());
+	close.addEventListener("click", () => {
+		closeModal();
+	});
 
 	// закрытие modal по клику в области
 	modal.addEventListener("click", (e) => {
@@ -47,7 +57,10 @@ const modals = (triggerSelector, modalSelector, closeSelector, time = 60000) => 
 			openModal();
 		}, time);
 	}
-	// showModalByTime();
+
+	if (openModalTimerAdd) {
+		// showModalByTime();
+	}
 };
 
 export default modals;
