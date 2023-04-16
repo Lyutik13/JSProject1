@@ -2,7 +2,7 @@ const modals = (
 	triggerSelector,
 	modalSelector,
 	closeSelector,
-    closeClickOverlay = true,
+	closeClickOverlay = true,
 	openModalTimerAdd = false,
 	time = 60000
 ) => {
@@ -13,16 +13,16 @@ const modals = (
 
 	function closeModal() {
 		/* 		modal.classList.add("hide");
-		modal.classList.remove("show");
-		document.body.style.overflow = ""; */
+        modal.classList.remove("show");
+        document.body.style.overflow = ""; */
 		modal.style.display = "none";
 		document.body.style.overflow = "";
 	}
 
 	function openModal() {
 		/* 		modal.classList.add("show");
-		modal.classList.remove("hide");
-		document.body.style.overflow = "hidden"; */
+        modal.classList.remove("hide");
+        document.body.style.overflow = "hidden"; */
 		modal.style.display = "block";
 		document.body.style.overflow = "hidden";
 	}
@@ -46,14 +46,14 @@ const modals = (
 	});
 
 	close.addEventListener("click", () => {
-        displayNone();
+		displayNone();
 		closeModal();
 	});
 
 	// закрытие modal по клику в области
 	modal.addEventListener("click", (e) => {
 		if (e.target === modal && closeClickOverlay) {
-            displayNone();
+			displayNone();
 			closeModal();
 		}
 	});
@@ -65,6 +65,17 @@ const modals = (
 		}
 	});
 
+	// Закрытие модалки после отправки 3,5с
+	function closeModalByTimeAfterSubmit() {
+		modal.addEventListener("submit", () => {
+			setTimeout(() => {
+                closeModal();
+            }, 3500)
+		});
+	}
+
+	closeModalByTimeAfterSubmit();
+
 	// Открытие модалки через некоторое время (time = 60sec)
 	function showModalByTime() {
 		setTimeout(function () {
@@ -73,7 +84,7 @@ const modals = (
 	}
 
 	if (openModalTimerAdd) {
-		// showModalByTime();
+		showModalByTime();
 	}
 };
 

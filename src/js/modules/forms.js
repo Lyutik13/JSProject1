@@ -1,10 +1,10 @@
-const forms = () => {
+const forms = (state) => {
 	const form = document.querySelectorAll("form"),
 		inputs = document.querySelectorAll("input"),
 		phoneInputs = document.querySelectorAll("input[name='user_phone']");
 
 	// проверка номера валидность
-    /* 	phoneInputs.forEach((item) => {
+	/* 	phoneInputs.forEach((item) => {
 		item.addEventListener("input", () => {
 			item.value = item.value.replace(/\D/, "");
 		});
@@ -83,6 +83,12 @@ const forms = () => {
 			// собираем данные
 			const formData = new FormData(item);
 
+			if (item.getAttribute("data-calc") === "end") {
+				for (let key in state) {
+					formData.append(key, state[key]);
+				}
+			}
+
 			// отправляем данные
 			postData("server.php", formData)
 				.then((res) => {
@@ -94,7 +100,7 @@ const forms = () => {
 					clearInouts();
 					setTimeout(() => {
 						statusMessage.remove();
-					}, 5000);
+					}, 3000);
 				});
 		});
 	});
